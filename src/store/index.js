@@ -39,39 +39,53 @@ export default new Vuex.Store({
     transactions: [
         {
           item: 'income',
-          date:  moment().subtract(10, 'days').calendar(),
+          date:  moment().subtract(10, 'days'),
           amount: 1750.00,
           repeat: 'none',
           category: 1,
           payment: 'cash',
-          description: 'Epic Online Website'
+          description: 'Epic Online Website',
+          color: 'blue'
         },
         {
           item: 'expenditure',
-          date: moment().subtract(7, 'days').calendar(),
+          date: moment().subtract(7, 'days'),
           amount: 50.00,
           repeat: 'none',
           category: 0,
           payment: 'cash',
-          description: 'Heavy Breakfast'
+          description: 'Heavy Breakfast',
+          color: 'indigo'
         },
         {
           item: 'income',
-          date: moment().subtract(6, 'days').calendar(),
+          date: moment().subtract(6, 'days'),
           amount: 50.00,
           repeat: 'month',
           category: 1,
           payment: 'M-PESA',
-          description: 'Freelance with Maggy'
+          description: 'Freelance with Maggy',
+          color: 'cyan'
         },
         {
           item: 'expenditure',
-          date: moment().subtract(4, 'days').calendar(),
+          date: moment().subtract(4, 'days'),
           amount: 3500.00,
           repeat: 'year',
           category: 1,
           payment: 'paypaly',
-          description: 'Web Hosting'
+          description: 'Web Hosting',
+          color: 'teal'
+        },
+        {
+          item: 'expenditure',
+          date: moment().subtract(4, 'days'),
+          amount: 100.00,
+          repeat: 'day',
+          category: 1,
+          payment: 'cash',
+          description: 'Dinner',
+          color: 'purple'
         },
     ]
   },

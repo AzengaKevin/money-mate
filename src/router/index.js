@@ -13,8 +13,12 @@ const routes = [
   {
     path: "/transactions",
     name: "Transactions",
-    component: () =>
-      import("../views/transactions/Index")
+    component: () => import("../views/transactions/Index")
+  },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    component: () => import("../views/Calendar")
   }
 ];
 

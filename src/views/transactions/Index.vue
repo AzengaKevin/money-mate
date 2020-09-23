@@ -13,7 +13,7 @@
                   <v-card-title>{{ transaction.description }}</v-card-title>
                   <v-card-text>
                     <div class="d-flex justify-space-between align-center">
-                      <div>{{ transaction.date }}</div>
+                      <div>{{ transaction.date.calendar() }}</div>
                       <div class="display-1" :class=transaction.item>
                         <span v-if="transaction.item === 'income'">+</span>
                         <span v-if="transaction.item === 'expenditure'">-</span>

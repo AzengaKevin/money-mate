@@ -12,6 +12,7 @@ export default {
 
     props: {
         label: String,
+        showLabels: Boolean,
         chartData: Array,
         options: Object
     },
@@ -22,15 +23,27 @@ export default {
         const totals = this.chartData.map(d => d.total)
         const colors = this.chartData.map(d => d.color)
 
-        this.renderChart({
-            labels: dates,
+        if(this.showLabels){
 
-            datasets: [{
-                label: this.label,
-                data: totals,
-                backgroundColor: colors
-            }]
-        }, this.options)
+            this.renderChart({
+                labels: dates,
+    
+                datasets: [{
+                    label: this.label,
+                    data: totals,
+                    backgroundColor: colors
+                }]
+            }, this.options)
+        }else{
+            this.renderChart({
+                datasets: [{
+                    label: this.label,
+                    data: totals,
+                    backgroundColor: colors
+                }]
+            }, this.options)
+        }
+
     }
 
 }

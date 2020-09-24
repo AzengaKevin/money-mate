@@ -27,7 +27,7 @@
                                 <line-chart  :chart-data="entries" :options="options" label="Transactions"  />
                             </div>
                             <div v-else>
-                                <pie-chart :chart-data="entries" :options="options" label="Transactions"  />
+                                <pie-chart :chart-data="entries" show-labels="true" :options="options" label="Transactions"  />
                             </div>
 
                         </v-col>

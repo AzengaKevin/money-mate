@@ -42,12 +42,14 @@
                     class="pb-4 mb-6"
                     color="white"
                     outlined
-                    tile
-                  >
+                    tile>
                     <v-card-title>Categories Piechart</v-card-title>
-                    <v-card-text class="text-center">
-                      <div class="display-1 black--text">$150.00</div>
-                      <div class="caption">Elecrtricity - 25/09/2020</div>
+                    <v-card-text class="text-center"> 
+                      <v-row>
+                        <v-col cols="6">
+                          <pie-chart :chart-data="entries" show-labels="false" :options="options" label="Transactions"  />
+                        </v-col>
+                      </v-row>
                     </v-card-text>
                     
                   </v-card>
@@ -84,11 +86,53 @@
 
 <script>
 import Navigation from '@/components/Navigation';
+import PieChart from '@/components/PieChart';
+import { mapState } from "vuex";
 
 export default {
   components: {
     Navigation,
+    PieChart
+  },
+
+  computed: {
+    ...mapState(['transactions', 'categories'])
+  },
+
+  data(){
+    return{
+      entries: [],
+      options: {
+          responsive: true,
+          maintainAspectRatio: false
+      },
+    }
+  },
+
+  created(){
+    let localEntries = [];
+
+    this.transactions.forEach(transaction => {
+
+        const {
+            date,
+            amount,
+            color,
+        } = transaction;
+
+        localEntries.push({
+            date,
+            total: amount,
+            color
+        }); 
+        
+    });
+
+    this.entries = localEntries
+    
+    console.log(localEntries);
   }
+  
 }
 </script>
 

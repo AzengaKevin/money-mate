@@ -26,6 +26,11 @@ const routes = [
     component: () => import("../views/Calendar")
   },
   {
+    path: "/chronological",
+    name: "Chronological",
+    component: () => import("../views/Chronological")
+  },
+  {
     path: "/graph",
     name: "Graph",
     component: () => import("../views/Graph")

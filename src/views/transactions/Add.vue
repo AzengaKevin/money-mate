@@ -93,6 +93,7 @@ export default {
     data(vm){
         return {
             title: moment().format('dddd Do MMMM YYYY'),
+            date: new Date().toISOString().substr(0, 10),
             repeat: ['Daily', 'Weekly', 'Monthly', 'Yearly'],
             items: ['Income', 'Expenditure'],
             payments: ['cash', 'paypal', 'm-pesa', 'bitcoins'],

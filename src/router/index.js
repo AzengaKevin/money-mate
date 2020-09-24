@@ -16,6 +16,11 @@ const routes = [
     component: () => import("../views/transactions/Index")
   },
   {
+    path: "/transactions/create",
+    name: "TransactionCreate",
+    component: () => import("../views/transactions/Add")
+  },
+  {
     path: "/calendar",
     name: "Calendar",
     component: () => import("../views/Calendar")

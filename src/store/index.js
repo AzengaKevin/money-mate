@@ -10,7 +10,7 @@ export default new Vuex.Store({
         {icon: 'mdi-home', text: 'Home', route: '/' },
         {icon: 'mdi-calendar-today', text: 'Calendar', route: '/calendar' },
         {icon: 'mdi-view-day', text: 'Day', route: '/graph' },
-        {icon: 'mdi-plus', text: 'Add', route: '/entries/create' }
+        {icon: 'mdi-plus', text: 'Add', route: '/transactions/create' }
     ],
 
     categories: [
@@ -95,5 +95,8 @@ export default new Vuex.Store({
     }
   },
   actions: {},
-  modules: {}
+  modules: {},
+
+  getters: {
+  }
 });

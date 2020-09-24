@@ -39,7 +39,8 @@ export default {
                 datasets: [{
                     label: this.label,
                     data: totals,
-                    backgroundColor: colors
+                    backgroundColor: colors,
+                    weight: 1
                 }]
             }, this.options)
         }

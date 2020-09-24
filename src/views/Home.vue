@@ -14,11 +14,12 @@
                     tile
                     link
                     to="/transactions"
+                    height="200"
                   >
                     <v-card-title>Upcoming Expense</v-card-title>
                     <v-card-text class="text-center">
-                      <div class="display-1 black--text">$150.00</div>
-                      <div class="caption">Elecrtricity - 25/09/2020</div>
+                      <div class="display-1 black--text">${{ upcomingExpense.amount.toFixed(2) }}</div>
+                      <div class="caption">{{ upcomingExpense.name }} - {{ upcomingExpense.date.format("DD/MM/YYYY") }}</div>
                     </v-card-text>
                     
                   </v-card>
@@ -29,11 +30,12 @@
                     class="pb-4 mb-6"
                     outlined
                     tile
+                    height="200"
                   >
                     <v-card-title>Upcoming Income</v-card-title>
                     <v-card-text class="text-center">
-                      <div class="display-1 black--text">$1,750.00</div>
-                      <div class="caption">Pay Check - 21/09/2020</div>
+                      <div class="display-1 black--text">${{ upcomingIncome.amount.toFixed(2) }}</div>
+                      <div class="caption">{{ upcomingIncome.name }} - {{ upcomingIncome.date.format("DD/MM/YYYY") }}</div>
                     </v-card-text>
                   </v-card>
                 </v-col>
@@ -46,8 +48,8 @@
                     <v-card-title>Categories Piechart</v-card-title>
                     <v-card-text class="text-center"> 
                       <v-row>
-                        <v-col cols="6">
-                          <pie-chart :chart-data="entries" show-labels="false" :options="options" label="Transactions"  />
+                        <v-col cols="6" class="d-flex">
+                          <pie-chart :chart-data="entries" :show-labels="false" :options="options" label="Transactions"  />
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -87,7 +89,7 @@
 <script>
 import Navigation from '@/components/Navigation';
 import PieChart from '@/components/PieChart';
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -102,9 +104,16 @@ export default {
   data(){
     return{
       entries: [],
+      upcomingIncome: null,
+      upcomingExpense: null,
       options: {
           responsive: true,
-          maintainAspectRatio: false
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          }
       },
     }
   },
@@ -131,11 +140,18 @@ export default {
     this.entries = localEntries
     
     console.log(localEntries);
+  },
+  methods: {
+    ...mapGetters(['getUpcomingIncome', 'getUpcomingExpense'])
+  },
+
+  beforeMount(){
+    this.upcomingIncome = this.getUpcomingIncome();
+    this.upcomingExpense = this.getUpcomingExpense();
   }
   
 }
 </script>
 
 <style scoped>
-
 </style>

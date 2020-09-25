@@ -306,5 +306,37 @@ export default new Vuex.Store({
 
       return upcomingExpenses.reduce((prev, next) => prev.date.isBefore(next.date));
     },
+
+    getTotalMonthIncome: state => {
+      const currentMonthIncomes = state.items.filter(item => {
+        return state.selectedDate.isSame(item.date, 'month') && item.type == 'income';
+      });
+
+      let sum = 0.00;
+      currentMonthIncomes.forEach(item => sum  += item.amount);
+
+      return sum;
+    },
+
+    getTotalMonthExpense: state => {
+      const currentMonthExpenses = state.items.filter(item => {
+        return state.selectedDate.isSame(item.date, 'month') && item.type == 'expense';
+      });
+      
+      let sum = 0.00;
+      currentMonthExpenses.forEach(item => sum  += item.amount);
+
+      return sum;
+    },
+
+    getBudget: state => {
+      const budget = state.budgets.find(budget => budget.month == state.selectedDate.month() && budget.year == state.selectedDate.year());
+
+      if(budget){
+        return budget.budget;
+      }
+
+      return 2500;
+    }
   }
 });

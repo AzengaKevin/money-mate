@@ -172,4 +172,11 @@ export default {
 </script>
 
 <style scoped>
+  .income{
+    color: green;
+  }
+
+  .expense{
+    color: red;
+  }
 </style>

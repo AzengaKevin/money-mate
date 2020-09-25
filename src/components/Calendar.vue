@@ -75,7 +75,8 @@
 
 <script>
 
-  import { mapState } from "vuex";
+  import { mapMutations, mapState } from "vuex";
+  import moment from "moment";
 
 
   export default {
@@ -95,16 +96,19 @@
     }),
 
     computed: {
-      ...mapState(['transactions'])
+      ...mapState(['items'])
     },
     
     mounted () {
       this.$refs.calendar.checkChange()
     },
     methods: {
+      ...mapMutations(['setSelectedDate']),
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
+        
+        this.setSelectedDate(moment(date, "YYYY-MM-DD"));
       },
       getEventColor (event) {
         return event.color
@@ -141,12 +145,12 @@
         console.log(start)
         console.log(end)
 
-        this.transactions.forEach(transaction => {
+        this.items.forEach(item => {
           events.push({
-            name: transaction.description,
-            start: transaction.date.format('YYYY-MM-DD'),
-            end: transaction.date.format('YYYY-MM-DD'),
-            color: transaction.color
+            name: item.name,
+            start: item.date.format('YYYY-MM-DD'),
+            end: item.date.format('YYYY-MM-DD'),
+            color: item.color
           })
         })
 

@@ -15,6 +15,8 @@ export default new Vuex.Store({
         {icon: 'mdi-plus', text: 'Add', route: '/transactions/create' }
     ],
 
+    selectedDate: moment(),
+
     budgets: [
       {
         month: 8,
@@ -57,6 +59,18 @@ export default new Vuex.Store({
     ],
 
     items: [
+      {
+        itemId: 14,
+        categoryId: 1,
+        dateCreated: moment(),
+        date:  moment(),
+        amount: 574.50,
+        name: 'Breaf Fast',
+        recurring: 'Daily',
+        payment: 'Cash',
+        color: 'blue',
+        type: 'expense'
+      },
       {
         itemId: 1,
         categoryId: 1,
@@ -268,7 +282,12 @@ export default new Vuex.Store({
         },
     ]
   },
-  mutations: {},
+
+  mutations: {
+    setSelectedDate: (state, date) => {
+      state.selectedDate = date;
+    }
+  },
   actions: {},
   modules: {},
   getters: {

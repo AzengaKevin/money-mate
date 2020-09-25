@@ -16,34 +16,47 @@
                             <v-toolbar-title class="text-center primary--text">Transactions</v-toolbar-title>
                           </v-toolbar>
                         </v-sheet>
-                        <v-sheet height="600" style="height: 600px; max-height: 600px;">
-                          <v-card v-for="(transaction, index) in transactions" :key="index">
-                            <v-card-text>
-                              <v-row>
-                                <v-col cols="3">
-                                  <v-card outlined flat>
-                                    <v-card-text>
-                                      <div class="d-flex flex-column primary--text justify-center align-center">
-                                        <div>{{ getDay(transaction.date) }}</div>
-                                        <div class="text-uppercase">{{ getMonth(transaction.date) }}</div>
-                                      </div>
-                                    </v-card-text>
-                                  </v-card>
-                                </v-col>
-                                <v-col cols="5">
-                                    <h3>{{ getCategoryById(transaction.category) }}</h3>
-                                    <p>{{ transaction.description }}</p>
-                                </v-col>
-                                <v-col cols="4">
-                                  <div class="" :class=transaction.item>
-                                    <span v-if="transaction.item === 'income'">+</span>
-                                    <span v-if="transaction.item === 'expenditure'">-</span>
-                                    <span>${{ transaction.amount.toFixed(2) }}</span>
-                                  </div>
-                                </v-col>
-                              </v-row>
-                            </v-card-text>
-                          </v-card>
+                        <v-sheet>
+                              <v-virtual-scroll
+                                :items="items"
+                                :item-height="120"
+                                height="600"
+                              >
+                                <template v-slot="{ item }">
+                                  <v-list-item>
+                                    <v-list-item-content>
+                                        <v-card flat>
+                                          <v-card-text>
+                                            <v-row class="align-center">
+                                              <v-col cols="3">
+                                                <v-card outlined flat :class="item.date.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD') ? 'primary': 'white'">
+                                                  <v-card-text :class="item.date.format('YYYY-MM-DD') === selectedDate.format('YYYY-MM-DD') ? 'white--text': 'primary--text'">
+                                                    <div class="d-flex flex-column justify-center align-center">
+                                                      <div>{{ getDay(item.date) }}</div>
+                                                      <div class="text-uppercase">{{ getMonth(item.date) }}</div>
+                                                    </div>
+                                                  </v-card-text>
+                                                </v-card>
+                                              </v-col>
+                                              <v-col cols="5">
+                                                  <h3 class="text-capitalize">{{ getCategoryById(item.categoryId) }} (Category)</h3>
+                                                  <p>{{ item.name }}</p>
+                                              </v-col>
+                                              <v-col cols="4">
+                                                <div class="" :class=item.type>
+                                                  <span v-if="item.type === 'income'">+</span>
+                                                  <span v-if="item.type === 'expense'">-</span>
+                                                  <span>${{ item.amount.toFixed(2) }}</span>
+                                                </div>
+                                              </v-col>
+                                            </v-row>
+                                          </v-card-text>
+                                        </v-card>
+                                        <v-divider></v-divider>
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                </template>
+                              </v-virtual-scroll>
                         </v-sheet>
                       </v-col>
                     </v-row>
@@ -68,10 +81,14 @@ export default {
   },
 
   computed: {
-    ...mapState(['transactions', 'categories'])
+    ...mapState(['items', 'categories', 'selectedDate']),
+  },
+
+  mounted(){
   },
 
   methods: {
+
     getCategoryById(id){
       let category =  this.categories.find(category =>  category.id === id)
 
@@ -100,7 +117,7 @@ export default {
     color: green;
   }
 
-  .expenditure{
+  .expense{
     color: red;
   }
 </style>

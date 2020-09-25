@@ -4,7 +4,7 @@
     <v-main class="mx-4 my-4">
       <div class="home">
         <v-container>
-          <h1 class="title">September at a Glance</h1>
+          <h1 class="title">{{ month }} at a Glance</h1>
               <v-row align="center" justify="space-between">
                 <v-col cols="12" sm="5">
                   <v-card
@@ -104,7 +104,7 @@ export default {
 
   data(){
     return{
-      entries: [],
+      month: moment().format("MMMM"),
       upcomingIncome: null,
       upcomingExpense: null,
       options: {

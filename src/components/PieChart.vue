@@ -20,15 +20,16 @@ export default {
 
         const totals = this.chartData.map(d => d.total)
         const colors = this.chartData.map(d => d.color)
+        const labels = this.chartData.map(d => d.label)
 
         this.renderChart({
+            labels,
             datasets: [{
                 label: this.label,
                 data: totals,
                 backgroundColor: colors
             }]
         }, this.options)
-
 
     }
 

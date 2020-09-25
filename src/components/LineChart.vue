@@ -17,11 +17,11 @@ export default {
 
     mounted(){
 
-        const dates = this.chartData.map(d => d.date)
+        const labels = this.chartData.map(d => d.label)
         const totals = this.chartData.map(d => d.total)
 
         this.renderChart({
-            labels: dates,
+            labels,
             datasets: [{
                 label: this.label,
                 data: totals

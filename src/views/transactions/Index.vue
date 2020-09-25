@@ -7,17 +7,18 @@
         <div class="text-center title my-3">{{ title }}</div>
 
         <v-sheet color="grey lighten-3">
+            <div class="font-wiehgt-bold display-1 text-center py-3">Monthly Transactions View</div>
             <v-row class="pa-4">
-              <v-col v-for="(transaction, index) in transactions" :key=index cols="12" md="6">
+              <v-col v-for="(item, index) in items" :key="index" cols="12" md="6">
                 <v-card flat>
-                  <v-card-title>{{ transaction.description }}</v-card-title>
+                  <v-card-title>{{ item.name }}</v-card-title>
                   <v-card-text>
                     <div class="d-flex justify-space-between align-center">
-                      <div>{{ transaction.date.calendar() }}</div>
-                      <div class="display-1" :class=transaction.item>
-                        <span v-if="transaction.item === 'income'">+</span>
-                        <span v-if="transaction.item === 'expenditure'">-</span>
-                        <span>${{ transaction.amount.toFixed(2) }}</span>
+                      <div>{{ item.date.calendar() }}</div>
+                      <div class="display-1" :class="item.type">
+                        <span v-if="item.type === 'income'">+</span>
+                        <span v-if="item.type === 'expense'">-</span>
+                        <span>${{ item.amount.toFixed(2) }}</span>
                       </div>
                     </div>
                   </v-card-text>
@@ -29,6 +30,18 @@
       </v-container>
         
     </v-main>
+
+    <v-btn fixed
+          link
+          dark
+          fab
+          bottom
+          right
+          class="mr-3"
+          color="primary"
+          to="/transactions/create">
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -41,15 +54,10 @@ export default {
   data(){
     return {
       title: moment().format('dddd Do MMMM YYYY'),
-
-      //Use date as the key for the map
-      entries: new Map(),
-
-      entriesPopulated : false
     }
   },
   computed: {
-    ...mapState(['transactions'])
+    ...mapState(['transactions', 'items'])
   },
   
 
@@ -68,7 +76,7 @@ export default {
     color: green;
   }
 
-  .expenditure{
+  .expense{
     color: red;
   }
 </style>

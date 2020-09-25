@@ -76,12 +76,14 @@
               </v-row>
         </v-container>
         <v-btn fixed
+              link
               dark
               fab
               bottom
               right
               class="mr-3"
-              color="primary">
+              color="primary"
+              to="/transactions/create">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </div>

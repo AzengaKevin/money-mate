@@ -105,7 +105,6 @@ export default {
 
     getMonth(time){
       return time.format("MMM");
-      // return time.format('YYYY-MM-DD hh:mm');
     }
   }
 }

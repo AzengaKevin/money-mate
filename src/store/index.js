@@ -59,7 +59,7 @@ export default new Vuex.Store({
     items: [
       {
         itemId: 1,
-        categodyId: 1,
+        categoryId: 1,
         dateCreated: moment(),
         date:  moment().subtract(21, 'days'),
         amount: 574.50,
@@ -71,7 +71,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 2,
-        categodyId: null,
+        categoryId: null,
         dateCreated: moment(),
         date:  moment().subtract(22, 'days'),
         amount: 1000.00,
@@ -83,7 +83,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 3,
-        categodyId: 1,
+        categoryId: 1,
         dateCreated: moment(),
         date:  moment().subtract(11, 'days'),
         amount: 1000.00,
@@ -95,7 +95,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 4,
-        categodyId: null,
+        categoryId: null,
         dateCreated: moment(),
         date:  moment().subtract(13, 'days'),
         amount: 10000.50,
@@ -107,7 +107,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 5,
-        categodyId: 2,
+        categoryId: 2,
         dateCreated: moment(),
         date:  moment().subtract(10, 'days'),
         amount: 100.00,
@@ -119,7 +119,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 6,
-        categodyId: 3,
+        categoryId: 3,
         dateCreated: moment(),
         date:  moment().subtract(10, 'days'),
         amount: 50.00,
@@ -131,7 +131,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 7,
-        categodyId: 4,
+        categoryId: 4,
         dateCreated: moment(),
         date:  moment().subtract(13, 'days'),
         amount: 2000.00,
@@ -143,7 +143,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 8,
-        categodyId: 4,
+        categoryId: 4,
         dateCreated: moment(),
         date:  moment().subtract(13, 'days'),
         amount: 4000.00,
@@ -155,7 +155,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 9,
-        categodyId: 1,
+        categoryId: 1,
         dateCreated: moment(),
         date:  moment().subtract(12, 'days'),
         amount: 1000.00,
@@ -167,7 +167,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 10,
-        categodyId: 3,
+        categoryId: 3,
         dateCreated: moment(),
         date:  moment().subtract(12, 'days'),
         amount: 1500.00,
@@ -179,7 +179,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 11,
-        categodyId: null,
+        categoryId: null,
         dateCreated: moment(),
         date:  moment().add(4, 'days'),
         amount: 2000.00,
@@ -191,7 +191,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 12,
-        categodyId: null,
+        categoryId: null,
         dateCreated: moment(),
         date:  moment().add(4, 'days'),
         amount: 1500.00,
@@ -203,7 +203,7 @@ export default new Vuex.Store({
       },
       {
         itemId: 13,
-        categodyId: 4,
+        categoryId: 4,
         dateCreated: moment(),
         date:  moment().add(5, 'days'),
         amount: 1500.00,
@@ -286,6 +286,6 @@ export default new Vuex.Store({
       })
 
       return upcomingExpenses.reduce((prev, next) => prev.date.isBefore(next.date));
-    }
+    },
   }
 });

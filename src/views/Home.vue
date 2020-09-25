@@ -48,8 +48,10 @@
                     <v-card-title>Categories Piechart</v-card-title>
                     <v-card-text class="text-center"> 
                       <v-row>
-                        <v-col cols="6" class="d-flex">
-                          <pie-chart :chart-data="entries" :show-labels="false" :options="options" label="Transactions"  />
+                        <v-col cols="12" sm="5">
+                          <v-spacer></v-spacer>
+                          <pie-chart :chart-data="items" :options="options" label="Transactions" />
+                          <v-spacer></v-spacer>
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -61,6 +63,7 @@
                   color="white"
                     class="pb-4 mb-6"
                     outlined
+                    height="200"
                     tile
                   >
                     <v-card-title>Monthly Variance</v-card-title>
@@ -87,18 +90,16 @@
 </template>
 
 <script>
-import Navigation from '@/components/Navigation';
-import PieChart from '@/components/PieChart';
-import { mapState, mapGetters } from "vuex";
+import Navigation from "@/components/Navigation";
+import PieChart from "@/components/PieChart";
+import { mapGetters, mapState } from "vuex";
+
+import moment from "moment";
 
 export default {
   components: {
     Navigation,
     PieChart
-  },
-
-  computed: {
-    ...mapState(['transactions', 'categories'])
   },
 
   data(){
@@ -107,40 +108,57 @@ export default {
       upcomingIncome: null,
       upcomingExpense: null,
       options: {
-          responsive: true,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: false
-          }
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: false
+        }
       },
     }
   },
 
-  created(){
-    let localEntries = [];
+  computed: {
+    ...mapState(['categories']),
+    items(){
+      const currentMonthItems = this.$store.state.items.filter(item => {
+        return item.date.get("year") == moment().get("year") && item.date.get("month") == moment().get("month");
+      });
 
-    this.transactions.forEach(transaction => {
+      let localItems = this.categories.map(({id}) => ({ id : id, total: 0, color: "#000000"}));
 
-        const {
-            date,
-            amount,
-            color,
-        } = transaction;
+      currentMonthItems.forEach(item => {
 
-        localEntries.push({
-            date,
-            total: amount,
-            color
-        }); 
-        
-    });
+        localItems = localItems.map(localItem => {
+          if(localItem.id == item.categoryId){
+            let total = localItem.total + item.amount;
 
-    this.entries = localEntries
-    
-    console.log(localEntries);
+            return {
+              id: localItem.id,
+              total: total,
+              color: localItem.color
+            } 
+
+          }else {
+            return {
+              id: localItem.id,
+              total: localItem.total,
+              color: localItem.color
+            }
+          }
+        });
+
+      });
+
+      return localItems;
+    }
   },
+
+  created(){
+  },
+  
   methods: {
     ...mapGetters(['getUpcomingIncome', 'getUpcomingExpense'])
   },
